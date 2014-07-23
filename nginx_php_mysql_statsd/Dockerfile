@@ -1,4 +1,4 @@
-# Dockerfile for a third party LAMP stack
+# Dockerfile for a third party nginx/mysql/php/statsd stack
 
 FROM quay.io/signalfuse/maestro-base:14.04-0.1.8.1
 MAINTAINER Jack Lindamood <jack@signalfuse.com>
@@ -36,7 +36,7 @@ ADD 10-mysql.conf /etc/collectd.d/unmanaged_config/
 ADD 10-nginx.conf /etc/collectd.d/unmanaged_config/
 ADD 10-signalfx_plugin.conf /etc/collectd.d/unmanaged_config/
 ADD 10-statsd.conf /etc/collectd.d/unmanaged_config/
-ADD lamplogrotate.conf /etc/logrotate.d/
+ADD docker_logrotate.conf /etc/logrotate.d/
 
 RUN mkdir /opt
 RUN cd /opt && git clone https://github.com/marksteele/collectd-plugins.git /opt/collectd-plugins
@@ -46,7 +46,7 @@ RUN cd /opt && git clone git@github.com:signalfx/collectd-signalfx.git /opt/coll
 RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/collectd.conf
 
 # Setup run script to start the server
-ADD run.py /opt/lamp/.docker/
+ADD run.py /opt/docker/.docker/
 VOLUME /var/log/sf/
 
-CMD ["python", "/opt/lamp/.docker/run.py"]
+CMD ["python", "/opt/docker/.docker/run.py"]
