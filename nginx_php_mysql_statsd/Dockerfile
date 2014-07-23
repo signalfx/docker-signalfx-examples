@@ -36,7 +36,7 @@ ADD 10-innodb.conf /etc/collectd.d/unmanaged_config/
 ADD 10-mysql.conf /etc/collectd.d/unmanaged_config/
 ADD 10-nginx.conf /etc/collectd.d/unmanaged_config/
 ADD 10-statsd.conf /etc/collectd.d/unmanaged_config/
-ADD docker_logrotate.conf /etc/logrotate.d/
+ADD image_logrotate.conf /etc/logrotate.d/
 
 RUN mkdir /opt
 RUN cd /opt && git clone https://github.com/marksteele/collectd-plugins.git /opt/collectd-plugins
