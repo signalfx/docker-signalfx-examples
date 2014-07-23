@@ -41,7 +41,7 @@ ADD image_logrotate.conf /etc/logrotate.d/
 RUN cd /opt && git clone https://github.com/marksteele/collectd-plugins.git /opt/collectd-plugins
 
 # Install our collectd plugin
-RUN cd /opt && git clone git@github.com:signalfx/collectd-signalfx.git /opt/collectd-signalfx
+RUN cd /opt && git clone https://github.com/signalfx/collectd-signalfx.git /opt/collectd-signalfx
 RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/collectd-signalfx.conf
 
 # Setup run script to start the server
