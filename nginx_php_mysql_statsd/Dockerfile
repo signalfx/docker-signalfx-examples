@@ -5,7 +5,8 @@ MAINTAINER Jack Lindamood <jack@signalfuse.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
-RUN apt-get -y upgrade
+# Upgrade currently unable to run?
+#RUN apt-get -y upgrade
 
 # Install all apt-get utils
 RUN apt-get -y install curl python mysql-client mysql-server nginx php5-fpm php5-mysql collectd python logrotate
