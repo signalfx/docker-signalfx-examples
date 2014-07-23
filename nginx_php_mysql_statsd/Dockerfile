@@ -38,7 +38,6 @@ ADD 10-nginx.conf /etc/collectd.d/unmanaged_config/
 ADD 10-statsd.conf /etc/collectd.d/unmanaged_config/
 ADD image_logrotate.conf /etc/logrotate.d/
 
-RUN mkdir /opt
 RUN cd /opt && git clone https://github.com/marksteele/collectd-plugins.git /opt/collectd-plugins
 
 # Install our collectd plugin
