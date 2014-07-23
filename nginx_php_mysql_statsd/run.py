@@ -87,7 +87,7 @@ def update_plugin_config(config_filename, auth_token, sendto):
 
 
 execute(['touch', '/var/log/sf/start'], expected_code=0)
-update_plugin_config('/etc/collectd.d/unmanaged_config/10-signalfx_plugin.conf', os.getenv('SF_AUTH_TOKEN'), os.getenv('SF_AUTH_HOST'))
+update_plugin_config('/etc/collectd.d/unmanaged_config/collectd-signalfx.conf', os.getenv('SF_AUTH_TOKEN'), os.getenv('SF_AUTH_HOST'))
 update_nginx_host('/etc/nginx/nginx.conf', get_port('http'))
 update_nginx_host('/etc/collectd.d/unmanaged_config/10-nginx.conf', get_port('http'))
 execute(['nginx', '-t'], expected_code=0)
