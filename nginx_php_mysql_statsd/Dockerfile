@@ -35,7 +35,6 @@ ADD signalfx_types_db /etc/collectd.d/
 ADD 10-innodb.conf /etc/collectd.d/unmanaged_config/
 ADD 10-mysql.conf /etc/collectd.d/unmanaged_config/
 ADD 10-nginx.conf /etc/collectd.d/unmanaged_config/
-ADD 10-signalfx_plugin.conf /etc/collectd.d/unmanaged_config/
 ADD 10-statsd.conf /etc/collectd.d/unmanaged_config/
 ADD docker_logrotate.conf /etc/logrotate.d/
 
@@ -44,7 +43,7 @@ RUN cd /opt && git clone https://github.com/marksteele/collectd-plugins.git /opt
 
 # Install our collectd plugin
 RUN cd /opt && git clone git@github.com:signalfx/collectd-signalfx.git /opt/collectd-signalfx
-RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/collectd.conf
+RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/collectd-signalfx.conf
 
 # Setup run script to start the server
 ADD run.py /opt/docker/.docker/
