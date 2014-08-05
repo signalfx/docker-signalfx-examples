@@ -74,8 +74,12 @@ def update_nginx_host(config_filename, port):
         conf.write(contents)
 
 def update_plugin_config(config_filename, username, org, password, sendto, auth_token_finder):
-    assert(auth_token is not None)
+    assert(auth_token_finder is not None)
     assert(sendto is not None)
+    assert(config_filename is not None)
+    assert(username is not None)
+    assert(org is not None)
+    assert(password is not None)
     execute(['touch', auth_token_finder], expected_code=0)
     (auth_token, stder, retcode) = execute(['python', auth_token_finder, '--org', org, '--password', password, '--url', sendto, username], expect_code=0)
     logger.info("Using auth token %s", auth_token)
