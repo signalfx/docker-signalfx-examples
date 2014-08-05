@@ -73,9 +73,12 @@ def update_nginx_host(config_filename, port):
     with open(config_filename, 'w') as conf:
         conf.write(contents)
 
-def update_plugin_config(config_filename, auth_token, sendto):
+def update_plugin_config(config_filename, username, org, password, sendto, auth_token_finder):
     assert(auth_token is not None)
     assert(sendto is not None)
+    execute(['touch', auth_token_finder], expected_code=0)
+    (auth_token, stder, retcode) = execute(['python', auth_token_finder, '--org', org, '--password', password, '--url', sendto, username], expect_code=0)
+    logger.info("Using auth token %s", auth_token)
     with open(config_filename, 'r') as conf:
         contents = conf.read()
     if '%%%API_HOST%%%' not in contents:
@@ -87,7 +90,7 @@ def update_plugin_config(config_filename, auth_token, sendto):
 
 
 execute(['touch', '/var/log/sf/start'], expected_code=0)
-update_plugin_config('/etc/collectd.d/unmanaged_config/collectd-signalfx.conf', os.getenv('SF_AUTH_TOKEN'), os.getenv('SF_AUTH_HOST'))
+update_plugin_config('/etc/collectd.d/unmanaged_config/collectd-signalfx.conf', os.getenv('SF_AUTH_USERNAME'), os.getenv('SF_AUTH_ORG'), os.getenv('SF_AUTH_PASSWORD'), os.getenv('SF_AUTH_URL'), '/opt/collectd-signalfx/get_all_auth_tokens.py')
 update_nginx_host('/etc/nginx/nginx.conf', get_port('http'))
 update_nginx_host('/etc/collectd.d/unmanaged_config/10-nginx.conf', get_port('http'))
 execute(['nginx', '-t'], expected_code=0)
