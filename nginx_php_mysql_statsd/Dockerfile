@@ -43,6 +43,7 @@ RUN cd /opt && git clone https://github.com/marksteele/collectd-plugins.git /opt
 # Install our collectd plugin
 RUN cd /opt && git clone https://github.com/signalfx/collectd-signalfx.git /opt/collectd-signalfx
 RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/collectd-signalfx.conf
+RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/aggregation.conf
 
 # Setup run script to start the server
 ADD run.py /opt/docker/.docker/
