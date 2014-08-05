@@ -81,7 +81,7 @@ def update_plugin_config(config_filename, username, org, password, sendto, auth_
     assert(org is not None)
     assert(password is not None)
     execute(['touch', auth_token_finder], expected_code=0)
-    (auth_token, stder, retcode) = execute(['python', auth_token_finder, '--org', org, '--password', password, '--url', sendto, username], expect_code=0)
+    (auth_token, stder, retcode) = execute(['python', auth_token_finder, '--org', org, '--password', password, '--url', sendto, username], expected_code=0)
     logger.info("Using auth token %s", auth_token)
     with open(config_filename, 'r') as conf:
         contents = conf.read()
