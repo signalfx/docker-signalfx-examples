@@ -64,8 +64,8 @@ def repeated_exec(function, delay):
         time.sleep(delay)
         function(session)
 
-cassandra_rpc_port = get_port('rpc')
-execute(['sed', '-i', '-e', "s/^rpc_port.*/rpc_port: %d/" % cassandra_rpc_port, '/etc/cassandra/cassandra.yaml'], expected_code=0)
+#cassandra_rpc_port = get_port('rpc')
+#execute(['sed', '-i', '-e', "s/^rpc_port.*/rpc_port: %d/" % cassandra_rpc_port, '/etc/cassandra/cassandra.yaml'], expected_code=0)
 execute(['service', 'cassandra', 'start'], expected_code=0)
 time.sleep(7)
 logger.info("Before init")
