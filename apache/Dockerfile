@@ -15,6 +15,21 @@ EXPOSE 83
 
 ENV DEBIAN_FRONTEND noninteractive
 
+# Setup collectd
+ADD ../nginx_php_mysql_statsd/collectd.conf /etc/collectd/
+RUN mkdir /etc/collectd.d
+RUN mkdir /etc/collectd.d/unmanaged_config
+RUN mkdir /etc/collectd.d/managed_config
+ADD ../nginx_php_mysql_statsd/signalfx_types_db /etc/collectd.d/
+ADD image_logrotate.conf /etc/logrotate.d/
+ADD apache-collectd.conf /etc/collectd.d/managed_config/
+
+# Install our collectd plugin
+RUN cd /opt && git clone https://github.com/signalfx/collectd-signalfx.git /opt/collectd-signalfx
+RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/collectd-signalfx.conf
+RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/aggregation.conf
+RUN cd /etc/collectd.d/unmanaged_config/ && ln -s /opt/collectd-signalfx/aggregation.conf
+
 ADD ./apache.conf /etc/apache2/sites-available/
 RUN ln -s /etc/apache2/sites-available/apache.conf /etc/apache2/sites-enabled/
 
