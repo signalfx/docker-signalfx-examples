@@ -78,7 +78,7 @@ def get_auth_token():
         raise ExecuteError("Invalid return code %d", retcode)
     return auth_token
 
-def fix_signalfx_collectd_file(collectd_config_file='/etc/collectd.d/unmanaged_config/collectd-signalfx.conf'):
+def fix_signalfx_collectd_file(collectd_config_file='/etc/collectd.d/managed_config/10-signalfx.conf'):
     (username, org, password, sendto) = os.getenv('SF_AUTH_USERNAME'), os.getenv('SF_AUTH_ORG'), os.getenv('SF_AUTH_PASSWORD'), os.getenv('SF_AUTH_URL')
     update_in_file(collectd_config_file, '%%%API_HOST%%%', sendto)
     auth_token = get_auth_token()
