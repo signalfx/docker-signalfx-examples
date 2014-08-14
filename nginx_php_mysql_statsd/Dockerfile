@@ -12,6 +12,7 @@ RUN apt-get -y install curl python mysql-client mysql-server nginx php5-fpm php5
 RUN pip install git+git://github.com/signalfuse/maestro-ng
 
 RUN service nginx stop
+RUN service collectd stop
 
 # Setup PHP install
 ADD php/info.php /usr/share/nginx/html/
