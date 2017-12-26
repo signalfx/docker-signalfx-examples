@@ -49,7 +49,7 @@ RUN sed -i 's/APIToken "%%%API_TOKEN%%%"/APIToken "%%%API_TOKEN%%%"\n    url "%%
 
 # Setup java.so plugin
 RUN cd /lib64 && ln -s /usr/lib/jvm/java-7-oracle/jre/lib/amd64/server/libjvm.so
-# http://www.willdurness.com/collectinggraphing-information-on-neo4j-via-collectd-and-graphite/
+# https://bugzilla.redhat.com/show_bug.cgi?id=1212151
 # Seems easiest to just find a comment that's kinda where I want this line, and replace that comment with what I need
 # The basic problem is collectd is compiled thinking openjdk, but i'm using oracle, so I need to
 # point it to the correct location
